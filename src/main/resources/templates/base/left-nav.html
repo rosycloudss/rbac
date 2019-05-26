@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html class="x-admin-sm" lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 左侧菜单开始 -->
+<div class="left-nav" th:fragment="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+            <li th:each="menu : ${session.menuList}">
+                <a th:href="@{${menu.getUrl()}}">
+<!--                    <i class="iconfont " th:="${menu.getMenuIcon()}"></i>-->
+                    <i class="iconfont " th:attr="class=${'layui-icon ' +  menu.getMenuIcon()}"></i>
+                    <cite th:text="${menu.getMenuName()}"></cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu" th:if="${menu.getSubMenu().size() >0}">
+                    <li date-refresh="1" th:each="subMenu :${ menu.getSubMenu()}">
+                        <a th:attr="_href=@{${subMenu.getUrl()}}">
+                            <i class="iconfont" th:attr="class=${'layui-icon ' + subMenu.getMenuIcon()}"></i>
+                            <cite th:text="${subMenu.getMenuName()}">会员列表(静态表格)</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
